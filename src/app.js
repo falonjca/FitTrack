@@ -1,24 +1,33 @@
-require('dotenv').config(); // Cargar las variables de entorno desde .env
 const express = require('express');
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { CreateTableCommand } = require('@aws-sdk/client-dynamodb');
-const router = require('./routes/dynamoRoutes'); // Asegúrate de que el archivo de rutas se importe correctamente
+const bodyParser = require('body-parser');
+const { dynamoDB, crearTablas } = require('./config/dynamoConfig'); // Importar configuración de DynamoDB
+
+// Importar las rutas
+const usuarioRoutes = require('./routes/usuarioRoutes');
+const entrenamientoRoutes = require('./routes/entrenamientoRoutes');
+const medidaRoutes = require('./routes/medidaRoutes');
+const rutinaRoutes = require('./routes/rutinaRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 
-const client = new DynamoDBClient({
-    region: 'us-east-1',
-    credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-    }
-});
+app.use(bodyParser.json()); // Middleware para parsear JSON
 
-// Asegúrate de que el router esté configurado correctamente
-app.use('/dynamo', router);
+// Usar las rutas importadas
+app.use('/api/usuarios', usuarioRoutes);
+app.use('/api/entrenamientos', entrenamientoRoutes);
+app.use('/api/medidas', medidaRoutes);
+app.use('/api/rutinas', rutinaRoutes);
 
-// Inicializa el servidor
-app.listen(PORT, () => {
-    console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
+const iniciarServidor = async () => {
+  try {
+    await crearTablas(); // Llama a la función para crear tablas
+    app.listen(PORT, () => {
+      console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('Error al iniciar el servidor:', error);
+  }
+};
+
+iniciarServidor();

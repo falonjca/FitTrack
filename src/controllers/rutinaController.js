@@ -3,7 +3,7 @@ const dynamoDB = require('../config/dynamoConfig');
 const { v4: uuidv4 } = require('uuid');
 
 // Crear rutina
-exports.createRutina = async (req, res) => {
+exports.crearRutina = async (req, res) => {
   const { UserId, Nombre, Descripcion, Ejercicios } = req.body;
   const RutinaId = uuidv4();
 
@@ -21,7 +21,7 @@ exports.createRutina = async (req, res) => {
 };
 
 // Obtener rutina
-exports.getRutina = async (req, res) => {
+exports.obtenerRutinaPorId = async (req, res) => {
   const { rutinaId } = req.params;
 
   const params = {
@@ -38,7 +38,7 @@ exports.getRutina = async (req, res) => {
 };
 
 // Actualizar rutina
-exports.updateRutina = async (req, res) => {
+exports.actualizarRutina = async (req, res) => {
   const { rutinaId } = req.params;
   const { Nombre, Descripcion, Ejercicios } = req.body;
 
@@ -59,7 +59,7 @@ exports.updateRutina = async (req, res) => {
 };
 
 // Eliminar rutina
-exports.deleteRutina = async (req, res) => {
+exports.eliminarRutina = async (req, res) => {
   const { rutinaId } = req.params;
 
   const params = {

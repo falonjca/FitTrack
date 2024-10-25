@@ -3,7 +3,7 @@ const dynamoDB = require('../config/dynamoConfig');
 const { v4: uuidv4 } = require('uuid');
 
 // Crear entrenamiento
-exports.createEntrenamiento = async (req, res) => {
+exports.crearEntrenamiento = async (req, res) => {
   const { UserId, Tipo, Duracion, Calorias, Fecha } = req.body;
   const EntrenamientoId = uuidv4();
 
@@ -21,7 +21,7 @@ exports.createEntrenamiento = async (req, res) => {
 };
 
 // Obtener entrenamiento
-exports.getEntrenamiento = async (req, res) => {
+exports.obtenerEntrenamientoPorId = async (req, res) => {
   const { entrenamientoId } = req.params;
 
   const params = {
@@ -38,7 +38,7 @@ exports.getEntrenamiento = async (req, res) => {
 };
 
 // Actualizar entrenamiento
-exports.updateEntrenamiento = async (req, res) => {
+exports.actualizarEntrenamiento = async (req, res) => {
   const { entrenamientoId } = req.params;
   const { Tipo, Duracion, Calorias } = req.body;
 
@@ -59,7 +59,7 @@ exports.updateEntrenamiento = async (req, res) => {
 };
 
 // Eliminar entrenamiento
-exports.deleteEntrenamiento = async (req, res) => {
+exports.eliminarEntrenamiento = async (req, res) => {
   const { entrenamientoId } = req.params;
 
   const params = {

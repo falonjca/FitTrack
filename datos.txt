@@ -1,14 +1,37 @@
-my-dynamodb-project/
-├── node_modules/           # Módulos instalados por npm
+fittrack-backend/
 ├── src/
-│   ├── routes/
-│   │   └── dynamoRoutes.js # Contiene las rutas para interactuar con DynamoDB
-│   ├── config/
-│   │   └── dynamoConfig.js # Configuración de conexión con DynamoDB
-│   └── app.js              # Punto de entrada de la aplicación
-├── package.json            # Dependencias del proyecto y scripts de npm
-├── package-lock.json       # Detalles de las dependencias instaladas
-└── README.md               # Documentación del proyecto
+│   ├── controllers/            # Lógica de cada API (usuarios, entrenamientos, medidas, rutinas)
+│   │   ├── usuarioController.js
+│   │   ├── entrenamientoController.js
+│   │   ├── medidaController.js
+│   │   └── rutinaController.js
+│   ├── models/                 # Definición de las tablas de DynamoDB y atributos
+│   │   ├── usuarioModel.js
+│   │   ├── entrenamientoModel.js
+│   │   ├── medidaModel.js
+│   │   └── rutinaModel.js
+│   ├── routes/                 # Rutas o endpoints de la API
+│   │   ├── usuarioRoutes.js
+│   │   ├── entrenamientoRoutes.js
+│   │   ├── medidaRoutes.js
+│   │   └── rutinaRoutes.js
+│   ├── services/               # Interacciones con DynamoDB
+│   │   ├── dynamoClient.js     # Configuración de conexión y operaciones genéricas con DynamoDB
+│   └── app.js                  # Configuración general de la app Express
+│
+├── tests/                      # Pruebas unitarias y de integración
+│   ├── usuario.test.js
+│   ├── entrenamiento.test.js
+│   ├── medida.test.js
+│   └── rutina.test.js
+│
+├── .github/workflows/          # Configuración de CI/CD para despliegue automático
+│   └── deploy.yaml             # Archivo de configuración para GitHub Actions
+│
+├── .env                        # Configuración de variables de entorno (ej. credenciales AWS)
+├── .gitignore                  # Archivos y carpetas que no serán versionados en Git
+├── package.json                # Dependencias y scripts de Node.js
+└── README.md                   # Documentación del proyecto
 
 
 
@@ -20,3 +43,5 @@ Rutinas: POST http://localhost:3000/dynamo/create-rutinas
 
 
 intalar npm install @aws-sdk/client-dynamodb
+npm install dotenv
+
