@@ -1,0 +1,22 @@
+my-dynamodb-project/
+├── node_modules/           # Módulos instalados por npm
+├── src/
+│   ├── routes/
+│   │   └── dynamoRoutes.js # Contiene las rutas para interactuar con DynamoDB
+│   ├── config/
+│   │   └── dynamoConfig.js # Configuración de conexión con DynamoDB
+│   └── app.js              # Punto de entrada de la aplicación
+├── package.json            # Dependencias del proyecto y scripts de npm
+├── package-lock.json       # Detalles de las dependencias instaladas
+└── README.md               # Documentación del proyecto
+
+
+
+
+Usuarios: POST http://localhost:3000/dynamo/create-usuarios
+Entrenamientos: POST http://localhost:3000/dynamo/create-entrenamientos
+Medidas: POST http://localhost:3000/dynamo/create-medidas
+Rutinas: POST http://localhost:3000/dynamo/create-rutinas
+
+
+intalar npm install @aws-sdk/client-dynamodb
