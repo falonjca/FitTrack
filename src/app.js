@@ -11,7 +11,7 @@ const rutinaRoutes = require('./routes/rutinaRoutes');
 const app = express();
 const PORT = process.env.PORT || 3005;
 
-app.use(bodyParser.json()); // Middleware para parsear JSON
+app.use(express.json()); // Middleware para parsear JSON
 
 // Usar las rutas importadas
 app.use('/api/usuarios', usuarioRoutes);

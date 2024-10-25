@@ -1,5 +1,6 @@
-// src/controllers/medidaController.js
-const dynamoDB = require('../config/dynamoConfig');
+const { docClient } = require('../config/dynamoConfig'); // Importar correctamente docClient
+const { PutCommand, ScanCommand, GetCommand, UpdateCommand, DeleteCommand } = require('@aws-sdk/lib-dynamodb');
+const { v4: uuidv4 } = require('uuid');
 
 // Crear medida
 exports.crearMedida = async (req, res) => {
@@ -11,10 +12,10 @@ exports.crearMedida = async (req, res) => {
   };
 
   try {
-    await dynamoDB.put(params).promise();
+    await docClient.send(new PutCommand(params));
     res.status(201).json({ message: 'Medida registrada', Timestamp });
   } catch (error) {
-    res.status(500).json({ error: 'Error registrando medida', details: error });
+    res.status(500).json({ error: 'Error registrando medida', details: error.message });
   }
 };
 
@@ -28,12 +29,17 @@ exports.obtenerMedidaPorId = async (req, res) => {
   };
 
   try {
-    const result = await dynamoDB.get(params).promise();
-    res.json(result.Item);
+    const result = await docClient.send(new GetCommand(params));
+    if (result.Item) {
+      res.json(result.Item);
+    } else {
+      res.status(404).json({ error: 'Medida no encontrada' });
+    }
   } catch (error) {
-    res.status(500).json({ error: 'Error obteniendo medida', details: error });
+    res.status(500).json({ error: 'Error obteniendo medida', details: error.message });
   }
 };
+
 
 // Actualizar medida
 exports.actualizarMedida = async (req, res) => {
@@ -49,12 +55,13 @@ exports.actualizarMedida = async (req, res) => {
   };
 
   try {
-    const result = await dynamoDB.update(params).promise();
-    res.json({ message: 'Medida actualizada', result });
+    const result = await docClient.send(new UpdateCommand(params));
+    res.json({ message: 'Medida actualizada', result: result.Attributes });
   } catch (error) {
-    res.status(500).json({ error: 'Error actualizando medida', details: error });
+    res.status(500).json({ error: 'Error actualizando medida', details: error.message });
   }
 };
+
 
 // Eliminar medida
 exports.eliminarMedida = async (req, res) => {
@@ -66,9 +73,10 @@ exports.eliminarMedida = async (req, res) => {
   };
 
   try {
-    await dynamoDB.delete(params).promise();
+    await docClient.send(new DeleteCommand(params));
     res.json({ message: 'Medida eliminada' });
   } catch (error) {
-    res.status(500).json({ error: 'Error eliminando medida', details: error });
+    res.status(500).json({ error: 'Error eliminando medida', details: error.message });
   }
 };
+

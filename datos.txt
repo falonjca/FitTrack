@@ -1,5 +1,7 @@
 fittrack-backend/
 ├── src/
+│   ├── config/            # configura la conexión a DynamoDB e incluye funcion para crear tablas
+│   │   ├── dynamoConfig.js
 │   ├── controllers/            # Lógica de cada API (usuarios, entrenamientos, medidas, rutinas)
 │   │   ├── usuarioController.js
 │   │   ├── entrenamientoController.js
@@ -18,12 +20,6 @@ fittrack-backend/
 │   ├── services/               # Interacciones con DynamoDB
 │   │   ├── dynamoClient.js     # Configuración de conexión y operaciones genéricas con DynamoDB
 │   └── app.js                  # Configuración general de la app Express
-│
-├── tests/                      # Pruebas unitarias y de integración
-│   ├── usuario.test.js
-│   ├── entrenamiento.test.js
-│   ├── medida.test.js
-│   └── rutina.test.js
 │
 ├── .github/workflows/          # Configuración de CI/CD para despliegue automático
 │   └── deploy.yaml             # Archivo de configuración para GitHub Actions
@@ -45,3 +41,39 @@ Rutinas: POST http://localhost:3000/dynamo/create-rutinas
 intalar npm install @aws-sdk/client-dynamodb
 npm install dotenv
 
+
+http://localhost:3005/api/usuarios/
+crear usuarios
+{
+  "Nombre": "Ana Salas",
+  "Email": "Ana@example.com",
+  "Edad": 35,
+  "Sexo": "F"
+}
+http://localhost:3005/api/entrenamientos/
+crear entrenamientos
+{
+  "UserId": "",
+  "Tipo": "Ana@example.com",
+  "Duracion": 35,
+  "Calorias": "F"
+}
+
+http://localhost:3005/api/rutinas/
+{
+  "UserId": "b3818857-8c69-4ad7-9095-107651e832d6",
+  "Nombre": "Rutina de piernas",
+  "Descripcion": "Rutina para espalda",
+  "Ejercicios": [
+    {
+      "Nombre": "PushUp",
+      "Repeticiones": 15,
+      "Series": 4
+    },
+    {
+      "Nombre": "Press Banca",
+      "Repeticiones": 10,
+      "Series": 3
+    }
+  ]
+}
