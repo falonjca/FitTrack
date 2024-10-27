@@ -30,7 +30,19 @@ fittrack-backend/
 └── README.md                   # Documentación del proyecto
 
 
-
+/frontend
+│   ├── css/
+│   │   └── styles.css          
+│   ├── js/
+│   │   ├── usuarios.js        
+│   │   ├── entrenamientos.js   
+│   │   ├── medidas.js          
+│   │   └── rutinas.js          
+│   ├── index.html              
+│   ├── usuarios.html           
+│   ├── entrenamientos.html     
+│   ├── medidas.html            
+│   └── rutinas.html 
 
 Usuarios: POST http://localhost:3000/dynamo/create-usuarios
 Entrenamientos: POST http://localhost:3000/dynamo/create-entrenamientos
