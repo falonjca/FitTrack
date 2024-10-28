@@ -3,51 +3,42 @@ const formulario = document.getElementById('registroForm');
 formulario.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Capturar los valores del formulario
-    const nombre = document.getElementById('nombre').value;
-    const email = document.getElementById('email').value;
-    const edad = document.getElementById('edad').value;
-    const sexo = document.getElementById('sexo').value;
-
-    // Crear objeto con los datos
-    const usuarioData = {
-        Nombre: nombre,
-        Email: email,
-        Edad: edad,
-        Sexo: sexo
+    const usuario = {
+        Nombre: document.getElementById('nombre').value,
+        Email: document.getElementById('email').value,
+        Edad: document.getElementById('edad').value,
+        Sexo: document.getElementById('sexo').value
     };
 
     try {
-        const response = await fetch('http://localhost:3000/api/usuarios/', {
-            //mode: 'no-cors',
+        const respuesta = await fetch('http://localhost:3000/api/usuarios/', {
+
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(usuarioData)
+            body: JSON.stringify(usuario)
         });
 
-        if (response.ok) {
-            const data = await response.json();
+       
+            const data = await respuesta.json();
             Swal.fire({
                 icon: 'success',
                 title: 'Registro exitoso',
                 text: 'Usuario registrado exitosamente',
                 confirmButtonText: 'Aceptar',
             });
-        } else {
-            const errorData = await response.json();
+
+            console.log(data);
+
+        } catch (error){
+            error = await respuesta.json();
             Swal.fire({
                 icon: 'error',
-                title: 'Error en el registro',
-                text: errorData.error,
-            });
-        }
-    } catch (error) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error en la conexión',
-            text: error.message,
+                title: 'Error',
+                text: 'error', 
+                confirmButtonText: "Aceptar",
+    
         });
     }
 });

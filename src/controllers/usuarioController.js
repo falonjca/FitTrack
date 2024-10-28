@@ -35,7 +35,8 @@ exports.loguearUsuario = async (req, res) => {
   };
 
   try {
-    const result = await docClient.scan(params); // Usa docClient para hacer scan
+    //hay que seguir el patron de diseño de comandos de aws, "(new scanCommand(params));"
+    const result = await docClient.send(new ScanCommand(params)); // correcion 
     if (result.Items.length > 0) {
       res.json({ message: 'Inicio de sesión exitoso', User: result.Items[0] });
     } else {
