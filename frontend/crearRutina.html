@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Rutina</title>
+    <link rel="stylesheet" href="./css/crearRutina.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="home.html" class="header-btn">Inicio</a>
+            <a href="crearRutina.html" class="header-btn">Crear Rutina</a>
+            <a href="registroUsuario.html" class="header-btn">Inicio</a>
+            <a href="inicioSesion.html" class="header-btn">Iniciar Sesión</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Creacion de Rutina</h1>
+        <form id="crearRutinaForm">
+            <div class="form-group">
+                <label for="nombre">Nombre de la Rutina:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion" required>
+            </div>
+
+            <div id="ejerciciosF">
+                <h3>Ejercicios:</h3>
+            </div>
+            <button type="button" class="b" id="boton">Agregar Ejercicio</button>
+
+            <button type="submit" class="btn">Crear Rutina</button>
+        </form>
+    </div>
+
+    <script src="js/crearRutina.js"></script>
+</body>
+</html>
