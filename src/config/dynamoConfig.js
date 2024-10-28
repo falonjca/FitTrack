@@ -3,6 +3,7 @@ require("dotenv").config();
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const { CreateTableCommand } = require('@aws-sdk/client-dynamodb');
 const { DynamoDBDocumentClient, PutCommand, GetCommand } = require('@aws-sdk/lib-dynamodb');
+const { ListTablesCommand } = require('@aws-sdk/client-dynamodb');
 
 // Configuración de AWS
 const client = new DynamoDBClient({
@@ -19,6 +20,10 @@ const docClient = DynamoDBDocumentClient.from(client);
 
 // Función para crear las tablas necesarias
 const crearTablas = async () => {
+
+  // revisar esto
+  const tablasCreadas = await client.send(new ListTablesCommand({}));
+
   const tablas = [
     {
       TableName: 'Usuarios',
@@ -75,13 +80,19 @@ const crearTablas = async () => {
   ];
 
   for (const tabla of tablas) {
+    if(!tablasCreadas.TableNames.includes(tabla.TableName)){
     try {
       await client.send(new CreateTableCommand(tabla));
       console.log(`Tabla ${tabla.TableName} creada exitosamente`);
     } catch (error) {
       console.error(`Error creando la tabla ${tabla.TableName}:`, error);
     }
+    }else{
+      console.log(`La tabla ${tabla.TableName} ya existe`);
+    }
+
   }
+
 };
 
 module.exports = { client, docClient, crearTablas };
