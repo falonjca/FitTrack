@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    
+
     const userId = localStorage.getItem('UserId');
 
     const perfil = document.getElementById('perfil'); 
@@ -114,12 +114,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         mostrarE(perfil, editarPerfilB); 
     });
 
-    // Inicializar vista y cargar datos
+    
     iniciarEstadoVista();
-    await loadUserData(); // Cargar datos al inicio
+    await loadUserData();
 });
 
-// Cerrar sesión
 function cerrarSesion() {
     localStorage.removeItem('UserId');
     window.location.href = 'landingPage.html';
