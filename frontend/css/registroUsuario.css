@@ -14,7 +14,7 @@ body {
 }
 
 header {
-    background-color: #095683; 
+    background-color: rgb(0, 107, 130);
     width: 100%;
     padding: 1rem 0;
     text-align: center;
@@ -23,21 +23,21 @@ header {
 .header-container {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 1rem; 
 }
 
 .header-btn {
-    background-color: #fff;
-    color: #0761c2;
+    background-color: #ffb612;;
+    color: #000;
     border: none;
-    border-radius: 4px;
+    border-radius: 21px;
     padding: 0.5rem 1rem;
-    font-size: 14px;
+    font-size: 17px;
     cursor: pointer;
+    text-decoration: none;
 }
-
 .header-btn:hover {
-    background-color: #e7e7e7; 
+    background-color: #e0a907; 
 }
 
 .container {
@@ -79,16 +79,16 @@ select {
 }
 
 .btn {
-    background-color: #0761c2;
-    color: #fff;
+    background-color: #ffb612;;
+    color: #000;
     padding: 0.5rem;
     border: none;
-    border-radius: 4px;
-    font-size: 14px;
+    border-radius: 21px;
+    font-size: 17px;
     cursor: pointer;
     width: 100%;
 }
 
 .btn:hover {
-    background-color: #0c4f96;
+    background-color: #e0a907; 
 }
