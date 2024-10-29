@@ -3,15 +3,22 @@ const formulario = document.getElementById('registroForm');
 formulario.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    console.log('prueba conex');
+
+    const nombre  = document.getElementById('nombre').value;
+    const email = document.getElementById('email').value;
+    const edad = document.getElementById('edad').value;
+    const sexo = document.getElementById('sexo').value;
+
     const usuario = {
-        Nombre: document.getElementById('nombre').value,
-        Email: document.getElementById('email').value,
-        Edad: document.getElementById('edad').value,
-        Sexo: document.getElementById('sexo').value
-    };
+        Nombre: nombre,
+        Email: email,
+        Edad: edad,
+        Sexo: sexo
+    }
 
     try {
-        const respuesta = await fetch('http://localhost:3000/api/usuarios/', {
+        const response = await fetch('http://localhost:3000/api/usuarios/', {
 
             method: 'POST',
             headers: {
@@ -20,25 +27,36 @@ formulario.addEventListener('submit', async (e) => {
             body: JSON.stringify(usuario)
         });
 
-       
-            const data = await respuesta.json();
+            const result = await response.json();
+
+        if (response.ok) { 
             Swal.fire({
                 icon: 'success',
                 title: 'Registro exitoso',
                 text: 'Usuario registrado exitosamente',
                 confirmButtonText: 'Aceptar',
-            });
+           
+        }).then(() => {
+            window.location.href = 'inicioSesion.html'; 
+        });
 
-            console.log(data);
+            console.log(result);
+            console.log("prueba", result);
 
-        } catch (error){
-            error = await respuesta.json();
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'error', 
+                text: result.error,
                 confirmButtonText: "Aceptar",
-    
+            });
+        }
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Ocurrió un error en la conexión',
+            confirmButtonText: "Aceptar",
         });
     }
 });
