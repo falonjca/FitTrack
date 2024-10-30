@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="./css/inicioSesion.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="landingPage.html" class="header-btn">Inicio</a>
+            <a href="registroUsuario.html" class="header-btn">Registrarse</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <h1>Iniciar Sesión</h1>
+        <form id="iniciarSesionForm">
+            <div class="form-group">
+                <label for="correo">Correo Electrónico:</label>
+                <input type="text" id="correo" name="correo" required>
+            </div>
+            
+            <button type="submit" class="btn">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    <script src="js/inicioSesion.js"></script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { dynamoDB, crearTablas } = require('./config/dynamoConfig'); // Importar configuración de DynamoDB
+const cors = require("cors");
 
 // Importar las rutas
 const usuarioRoutes = require('./routes/usuarioRoutes');
@@ -9,7 +10,8 @@ const medidaRoutes = require('./routes/medidaRoutes');
 const rutinaRoutes = require('./routes/rutinaRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 3000;
+app.use(cors());
 
 app.use(express.json()); // Middleware para parsear JSON
 
