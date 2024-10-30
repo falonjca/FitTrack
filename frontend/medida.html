@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenamiento</title>
+    <link rel="stylesheet" href="./css/medida.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="home.html" class="header-btn">Inicio</a>
+            <a href="rutina.html" class="header-btn">Rutinas</a>
+            <a href="entrenamiento.html" class="header-btn">Entrenamientos</a>
+            <a href="medida.html" class="header-btn">Medidas</a>
+            <a href="perfil.html" class="header-btn">Perfil</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Registrar Medida</h1>
+        <form id="medidaForm">
+            <div class="form-group">
+                <label for="grasa">Grasa:</label>
+                <input type="number" id="grasa" name="grasa" required>
+            </div>
+            <div class="form-group">
+                <label for="musculo">Musculo:</label>
+                <input type="number" id="musculo" name="musculo" required>
+            </div>
+            <div class="form-group">
+                <label for="altura">Altura:</label>
+                <input type="number" id="altura" name="altura" required>
+            </div>
+            <div class="form-group">
+                <label for="peso">Peso:</label>
+                <input type="number" id="peso" name="peso" required>
+            </div>
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="datetime-local" id="fecha" name="fecha" required>
+            </div>
+
+            <button type="submit" class="btn">Registrar</button>
+        </form>
+    </div>
+
+    <script src="js/medida.js"></script>
+</body>
+</html>
