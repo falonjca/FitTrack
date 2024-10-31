@@ -30,7 +30,7 @@ fittrack-backend/
 └── README.md                   # Documentación del proyecto
 
 
-/frontend
+├── frontend
 │   ├── css/
 │   │   └── styles.css          
 │   ├── js/
