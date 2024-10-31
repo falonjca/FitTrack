@@ -89,3 +89,13 @@ http://localhost:3005/api/rutinas/
     }
   ]
 }
+
+http://localhost:3005/api/medidas/
+{
+  "UserId": "2033da05-963f-48af-9865-cbbd706463c6",
+  "Timestamp": "2023-10-25T12:34:56Z",
+  "Grasa": 20,
+  "Musculo": 35.0,
+  "Altura": 162,
+  "Peso": 62
+}
