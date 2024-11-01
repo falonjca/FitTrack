@@ -20,6 +20,8 @@ fittrack-backend/
 │   ├── services/               # Interacciones con DynamoDB
 │   │   ├── dynamoClient.js     # Configuración de conexión y operaciones genéricas con DynamoDB
 │   └── app.js                  # Configuración general de la app Express
+│   │ 
+│   └── .env   
 │
 ├── .github/workflows/          # Configuración de CI/CD para despliegue automático
 │   └── deploy.yaml             # Archivo de configuración para GitHub Actions
@@ -99,3 +101,7 @@ http://localhost:3005/api/medidas/
   "Altura": 162,
   "Peso": 62
 }
+
+
+
+https://h9y3q74qmd.execute-api.us-east-1.amazonaws.com/prod/api/usuarios

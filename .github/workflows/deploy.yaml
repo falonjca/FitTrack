@@ -1,34 +1,35 @@
-name: Deploy to AWS
+name: Deploy to AWS Lambda
 
 on:
   push:
     branches:
-      - main  # Define el branch que activará el flujo de trabajo, normalmente 'main'
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'  # Especifica la versión de Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install Dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./backend
 
-    - name: Run Tests
-      run: npm test  # Opcional, si tienes pruebas automatizadas
+      - name: Zip the function
+        run: zip -r function.zip src node_modules .env
+        working-directory: ./backend
 
-    - name: Deploy to AWS
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: 'us-east-1' 
-      run: |
-        npm run build   # Ejecuta tu script de construcción si tienes uno
-        # Usa AWS CLI o un script para desplegar tu app
+      - name: Deploy to Lambda
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-west-2
+        run: |
+          aws lambda update-function-code --function-name <nombre-de-tu-funcion> --zip-file fileb://function.zip
+        working-directory: ./backend
