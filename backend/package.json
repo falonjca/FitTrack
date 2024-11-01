@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Proyecto de Node.js con Express para crear tablas en DynamoDB",
   "main": "src/app.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node backend/src/app.js"
   },

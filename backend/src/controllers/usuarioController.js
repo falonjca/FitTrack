@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 
 // Registrar usuario
 exports.crearUsuario = async (req, res) => {
+  //console.log(`calling crearUsuario with body ${JSON.stringify(req.body)}`); // and request ${JSON.safeStringify(req)}
   const { Nombre, Email, Edad, Sexo } = req.body;
   const UserId = uuidv4(); // Genera un ID único para el usuario
   const FechaRegistro = new Date().toISOString(); // Asignar la fecha de registro actual
