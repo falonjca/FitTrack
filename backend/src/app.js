@@ -47,16 +47,17 @@ app.get('/', (req, res) => {
 
 const iniciarServidor = async () => {
   try {
+    console.log('calling createTables');
     await crearTablas(); // Llama a la función para crear tablas
-    app.listen(PORT, () => {
-      console.log(`Servidor corriendo en http://localhost:${PORT}`);
-    });
+    // app.listen(PORT, () => {
+    //   console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    // });
   } catch (error) {
     console.error('Error al iniciar el servidor:', error);
   }
 };
 
-//iniciarServidor();
+iniciarServidor();
 
 // module.exports.handler = serverless(app);
 
@@ -68,4 +69,3 @@ module.exports.handler = async (event, context) => {
   console.log(`response generated and got ${JSON.stringify(result)}`);
   return result;
 };
-

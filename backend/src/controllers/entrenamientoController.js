@@ -82,4 +82,3 @@ exports.eliminarEntrenamiento = async (req, res) => {
     res.status(500).json({ error: 'Error eliminando entrenamiento', details: error.message });
   }
 };
-

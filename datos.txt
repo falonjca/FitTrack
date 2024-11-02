@@ -7,6 +7,9 @@ fittrack-backend/
 │   │   ├── entrenamientoController.js
 │   │   ├── medidaController.js
 │   │   └── rutinaController.js
+│   ├── .env/   
+
+
 │   ├── models/                 # Definición de las tablas de DynamoDB y atributos
 │   │   ├── usuarioModel.js
 │   │   ├── entrenamientoModel.js

@@ -8,10 +8,10 @@ const { ListTablesCommand } = require('@aws-sdk/client-dynamodb');
 // Configuración de AWS
 const client = new DynamoDBClient({
   region: process.env.AWS_REGION,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  },
+  //credentials: {
+  //  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+ //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+ // },
 });
 
 // Crear un DocumentClient
@@ -54,10 +54,12 @@ const crearTablas = async () => {
     {
       TableName: 'Medidas',
       KeySchema: [
-        { AttributeName: 'UserId', KeyType: 'HASH' },
+        { AttributeName: 'UserId', KeyType: 'HASH' }, // Partition Key
+        { AttributeName: 'Timestamp', KeyType: 'RANGE' } // Sort Key
       ],
       AttributeDefinitions: [
         { AttributeName: 'UserId', AttributeType: 'S' },
+        { AttributeName: 'Timestamp', AttributeType: 'S' } 
       ],
       ProvisionedThroughput: {
         ReadCapacityUnits: 5,
