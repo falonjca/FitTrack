@@ -2,7 +2,7 @@ const formulario = document.getElementById('registroForm');
 
 formulario.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+    
     console.log('prueba conex');
 
     const nombre  = document.getElementById('nombre').value;
@@ -16,7 +16,7 @@ formulario.addEventListener('submit', async (e) => {
         Edad: edad,
         Sexo: sexo
     }
-
+      
     try {
         const response = await fetch('http://localhost:3000/api/usuarios/', {
 

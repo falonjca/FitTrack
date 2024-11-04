@@ -1,6 +1,7 @@
 const { docClient } = require('../config/dynamoConfig'); // Importar correctamente docClient
 const { PutCommand, ScanCommand, GetCommand, UpdateCommand, DeleteCommand } = require('@aws-sdk/lib-dynamodb');
 const { v4: uuidv4 } = require('uuid');
+const Usuario = require('../models/usuarioModel');
 
 // Registrar usuario
 exports.crearUsuario = async (req, res) => {
@@ -22,6 +23,31 @@ exports.crearUsuario = async (req, res) => {
   }
 };
 
+
+/*
+//opcion 2 utilizando los models
+exports.crearUsuario = async (req, res) => {
+ 
+  try{
+  const usuario = Usuario(req.body);
+
+  usuario.validate();
+
+  const params = {
+    TableName: 'Usuarios',
+    Item: usuario
+  }
+
+  await docClient.send(new PutCommand(params));
+  res.status(201).json({ message: 'Usuario registrado', UserId });
+
+  }catch(error){
+    res.status(500).json({ error: 'Error registrando usuario', details: error.message });
+  
+  }
+}
+*/
+
 // Iniciar sesión
 exports.loguearUsuario = async (req, res) => {
   const { Email } = req.body;
@@ -34,6 +60,7 @@ exports.loguearUsuario = async (req, res) => {
     }
   };
 
+  
   try {
     //hay que seguir el patron de diseño de comandos de aws, "(new scanCommand(params));"
     const result = await docClient.send(new ScanCommand(params)); // correcion 
