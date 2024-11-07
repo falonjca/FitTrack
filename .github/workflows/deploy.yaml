@@ -3,7 +3,7 @@ name: Deploy to AWS Lambda
 on:
   push:
     branches:
-      - main
+      - falon
 
 jobs:
   deploy:
@@ -22,7 +22,7 @@ jobs:
         working-directory: ./backend
 
       - name: Zip the function
-        run: zip -r function.zip src node_modules .env
+        run: zip -r function.zip src node_modules
         working-directory: ./backend
 
       - name: Deploy to Lambda
@@ -31,5 +31,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-west-2
         run: |
-          aws lambda update-function-code --function-name <nombre-de-tu-funcion> --zip-file fileb://function.zip
+          aws lambda update-function-code --function-name fittrack-backend-function --zip-file fileb://function.zip
         working-directory: ./backend
