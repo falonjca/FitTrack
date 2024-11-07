@@ -168,3 +168,4 @@ exports.eliminarUsuario = async (req, res) => {
   }
 };
 
+console.log(`prueba deploy`);
