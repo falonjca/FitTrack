@@ -3,33 +3,33 @@ name: Deploy to AWS Lambda
 on:
   push:
     branches:
-      - main
+      - Diego
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
         working-directory: ./backend
 
       - name: Zip the function
-        run: zip -r function.zip src node_modules .env
+        run: zip -r function.zip src node_modules
         working-directory: ./backend
 
       - name: Deploy to Lambda
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-west-2
+          AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
-          aws lambda update-function-code --function-name <nombre-de-tu-funcion> --zip-file fileb://function.zip
+          aws lambda update-function-code --function-name fittrack-backend-function --zip-file fileb://function.zip
         working-directory: ./backend
