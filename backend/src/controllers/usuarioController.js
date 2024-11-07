@@ -196,3 +196,4 @@ exports.eliminarUsuario = async (req, res) => {
 };
 
 console.log("Prueba action");
+console.log("diego prueba");
