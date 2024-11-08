@@ -18,11 +18,12 @@ formulario.addEventListener('submit', async (e) => {
     }
       
     try {
-        const response = await fetch('http://localhost:3000/api/usuarios/', {
+        const response = await fetch(`${baseUrl}/usuarios`, {
 
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-api-key': key
             },
             body: JSON.stringify(usuario)
         });

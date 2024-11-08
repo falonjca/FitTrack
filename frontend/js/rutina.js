@@ -37,10 +37,11 @@ formu.addEventListener('submit', async (e) => {
     };
 
     try {
-        const response = await fetch('http://localhost:3000/api/rutinas', {
+        const response = await fetch(`${baseUrl}/rutinas`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-api-key': key
             },
             body: JSON.stringify(rutinas)
         });

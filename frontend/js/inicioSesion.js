@@ -24,10 +24,12 @@ login.addEventListener('submit', async (e) => {
     }
 
     try {
-        const respuesta = await fetch('http://localhost:3000/api/usuarios/login', {
+        const respuesta = await fetch(`${baseUrl}/usuarios/login`, {
+
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-api-key': key
             },
             body: JSON.stringify(datos)
         });

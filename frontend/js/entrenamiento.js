@@ -17,10 +17,11 @@ entrenamientoForm.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/api/entrenamientos/', {
+        const response = await fetch(`${baseUrl}/entrenamientos`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-api-key': key
             },
             body: JSON.stringify(entrenamiento)
         });

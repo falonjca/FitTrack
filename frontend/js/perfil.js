@@ -18,9 +18,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         perfil.style.display = 'block'; 
     }
 
-    async function loadUserData() {
+    async function cargarDatoss() {
         try {
-            const response = await fetch(`http://localhost:3000/api/usuarios/${userId}`);
+            const response = await fetch(`${baseUrl}/usuarios/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': key
+                }
+            });
+        
+
             if (response.ok) {
 
                 const usuario = await response.json();
@@ -63,10 +71,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
 
         try {
-            const response = await fetch(`http://localhost:3000/api/usuarios/${userId}`, {
+            const response = await fetch(`${baseUrl}/usuarios/${userId}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'x-api-key': key
                 },
                 body: JSON.stringify(actualizoDatos)
             });
@@ -116,7 +125,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     
     iniciarEstadoVista();
-    await loadUserData();
+    await cargarDatoss();
 });
 
 function cerrarSesion() {
