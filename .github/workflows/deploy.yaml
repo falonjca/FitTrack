@@ -1,4 +1,4 @@
-name: Deploy to AWS Lambda
+name: Deploy Backend to Lambda and Frontend to S3
 
 on:
   push:
@@ -6,25 +6,30 @@ on:
       - falonFinal
 
 jobs:
-  deploy:
+  deploy_lambda:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      # Step 2: Set up Node.js for Lambda
+      - name: Set up Node.js for Lambda
         uses: actions/setup-node@v3
         with:
           node-version: "20"
 
-      - name: Install dependencies
+      # Step 3: Install dependencies for Lambda
+      - name: Install dependencies for Lambda
         run: npm install
         working-directory: ./backend
 
+      # Step 4: Zip the Lambda function
       - name: Zip the function
         run: zip -r function.zip src node_modules
         working-directory: ./backend
 
+      # Step 5: Deploy to Lambda
       - name: Deploy to Lambda
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -33,3 +38,34 @@ jobs:
         run: |
           aws lambda update-function-code --function-name fittrack-backend-function --zip-file fileb://function.zip
         working-directory: ./backend
+
+  deploy_s3:
+    runs-on: ubuntu-latest
+    needs: deploy_lambda  # Este paso espera que el trabajo de Lambda termine primero
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js for frontend (si es necesario)
+      - name: Set up Node.js for frontend
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      # Step 3: Install dependencies and build frontend
+      - name: Install dependencies and build frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build  # Ajusta este comando según tu configuración de build
+        working-directory: ./frontend
+
+      # Step 4: Deploy to S3
+      - name: Deploy to S3 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+        run: |
+          aws s3 sync frontend/ s3://prueba-front-static --delete
