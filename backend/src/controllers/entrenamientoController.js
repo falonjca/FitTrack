@@ -2,7 +2,7 @@ const { docClient } = require('../config/dynamoConfig'); // Importar correctamen
 const { PutCommand, ScanCommand, GetCommand, UpdateCommand, DeleteCommand } = require('@aws-sdk/lib-dynamodb');
 const { v4: uuidv4 } = require('uuid');
 
-
+console.log("Diego");
 // Crear entrenamiento
 exports.crearEntrenamiento = async (req, res) => {
   const { UserId, Tipo, Duracion, Calorias, Fecha } = req.body;
