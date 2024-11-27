@@ -52,3 +52,46 @@ entrenamientoForm.addEventListener('submit', async (e) => {
         });
     }
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const tabla = $('#tabla').DataTable(); // Asegúrate de que estás utilizando jQuery para DataTables.
+
+    async function cargarDatosTabla() {
+        try {
+            const response = await fetch(`${baseUrl}/entrenamientos`, {
+                headers: {
+                    'x-api-key': key
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al cargar datos');
+            }
+
+            const data = await response.json();
+
+            // Limpiar la tabla antes de agregar nuevas filas
+            tabla.clear();
+
+            // Agregar cada fila a la tabla
+            data.forEach(fila => {
+                tabla.row.add([
+                    fila.Tipo,
+                    fila.Duracion,
+                    fila.Calorias,
+                    `
+                    <button onclick="editar(${fila.id})">Editar</button>
+                    <button onclick="eliminar(${fila.id})">Eliminar</button>
+                    `
+                ]);
+            });
+
+            // Actualizar la tabla para que muestre los nuevos datos
+            tabla.draw();
+        } catch (error) {
+            console.error('Error al cargar los datos de la tabla:', error);
+        }
+    }
+
+    // Llamar a la función para cargar datos al iniciar
+    cargarDatosTabla();
+});

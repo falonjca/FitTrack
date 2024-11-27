@@ -4,6 +4,7 @@ const entrenamientoController = require('../controllers/entrenamientoController'
 
 // Rutas para entrenamientos
 router.post('/', entrenamientoController.crearEntrenamiento); // Crear entrenamiento
+router.get('/entrenamiento', entrenamientoController.obtenerTodosLosEntrenamientos); 
 router.get('/:entrenamientoId', entrenamientoController.obtenerEntrenamientoPorId); // Obtener entrenamiento por ID
 router.put('/:entrenamientoId', entrenamientoController.actualizarEntrenamiento); // Actualizar entrenamiento
 router.delete('/:entrenamientoId', entrenamientoController.eliminarEntrenamiento); // Eliminar entrenamiento
