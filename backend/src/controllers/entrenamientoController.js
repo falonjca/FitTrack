@@ -1,6 +1,7 @@
 const { docClient } = require('../config/dynamoConfig'); // Importar correctamente docClient
 const { PutCommand, ScanCommand, GetCommand, UpdateCommand, DeleteCommand } = require('@aws-sdk/lib-dynamodb');
 const { v4: uuidv4 } = require('uuid');
+const Entrenamiento = require('../models/entrenamientoModel');
 
 console.log("Diego");
 // Crear entrenamiento
@@ -21,18 +22,23 @@ exports.crearEntrenamiento = async (req, res) => {
   }
 };
 
+
 exports.obtenerTodosLosEntrenamientos = async (req, res) => {
   const params = {
     TableName: 'Entrenamientos',
   };
 
   try {
+    
     const result = await docClient.send(new ScanCommand(params)); 
-    res.json(result.Items); 
+
+    res.json(result.Items);
   } catch (error) {
+    
     res.status(500).json({ error: 'Error obteniendo entrenamientos', details: error.message });
   }
 };
+
 
 
 // Obtener entrenamiento
