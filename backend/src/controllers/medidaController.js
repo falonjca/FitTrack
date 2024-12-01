@@ -5,16 +5,15 @@ const { v4: uuidv4 } = require('uuid');
 // Crear medida
 exports.crearMedida = async (req, res) => {
   const {UserId, Timestamp, Grasa, Musculo, Altura, Peso } = req.body;
-  const MedidaId = uuidv4();
-
+  
   const params = {
     TableName: 'Medidas',
-    Item: { MedidaId, UserId, Timestamp, Grasa, Musculo, Altura, Peso }
+    Item: { UserId, Timestamp, Grasa, Musculo, Altura, Peso }
   };
 
   try {
     await docClient.send(new PutCommand(params));
-    res.status(201).json({ message: 'Medida registrada', EntrenamientoId });
+    res.status(201).json({ message: 'Medida registrada', Timestamp });
   } catch (error) {
     res.status(500).json({ error: 'Error registrando medida', details: error.message });
   }
