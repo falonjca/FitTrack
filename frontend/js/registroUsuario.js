@@ -53,11 +53,6 @@ formulario.addEventListener('submit', async (e) => {
             });
         }
     } catch (error) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Ocurrió un error en la conexión',
-            confirmButtonText: "Aceptar",
-        });
+       console.error(error);
     }
 });

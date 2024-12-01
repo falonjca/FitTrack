@@ -11,6 +11,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f0f2f5;
+   
 }
 
 header {
@@ -78,6 +79,7 @@ select {
     font-size: 14px;
 }
 
+
 .btn {
     background-color: #ffb612;;
     color: #000;
@@ -88,6 +90,7 @@ select {
     cursor: pointer;
     width: 100%;
 }
+
 
 .btn:hover {
     background-color: #e0a907; 
@@ -123,4 +126,21 @@ select {
 
 #tabla tbody tr:hover {
     background-color: #f1f1f1;
+}
+
+
+
+.centered {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.esp{
+    margin-top: 30px;
+}
+
+.co{
+    color: white;
+    background-color: #000;
+    margin-top: 25px;
 }

@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrenamiento</title>
     <link rel="stylesheet" href="./css/entrenamiento.css">
+    <link rel="stylesheet" href="./css/site.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
     <header>
         <div class="header-container">
             <a href="home.html" class="header-btn">Inicio</a>
@@ -34,29 +36,49 @@
                 <label for="calorias">Calorías:</label>
                 <input type="number" id="calorias" name="calorias" required>
             </div>
-
             <button type="submit" class="btn">Registrar</button>
         </form>
     </div>
 
     <div class="tablaa">
-    <table id="tabla" class="display">
-        <thead>
-            <tr>
-                <th>Tipo</th>
-                <th>Duración</th>
-                <th>Calorías</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-    </table>
+        <table id="tabla" class="display">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Duración</th>
+                    <th>Calorías</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="entrenamiento"></tbody>
+        </table>
     </div>
+
+    <div class="esp">
+    <form id="editForm" style="display: none;">
+        <h2>Editar Entrenamiento</h2>
+        <label for="editTipo">Tipo:</label>
+        <input type="text" id="editTipo" name="tipo" required>
+        <label for="editDuracion">Duración:</label>
+        <input type="number" id="editDuracion" name="duracion" required>
+        <label for="editCalorias">Calorías:</label>
+        <input type="number" id="editCalorias" name="calorias" required>
+        <button type="submit">Guardar</button>
+        <button type="button" id="cancelEdit">Cancelar</button>
+    </form>
+</div>
+
+<br>
+
+<header class="co">
+    <p>© 2024 FitTrack. Todos los derechos reservados.</p>
+</header>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/Entrenamiento.js"></script>
     <script src="js/site.js"></script>
-
 </body>
 </html>

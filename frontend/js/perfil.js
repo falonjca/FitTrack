@@ -53,12 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
             }
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Ocurrió un error al intentar cargar los datos',
-                confirmButtonText: "Aceptar",
-            });
+           console.error(error);
         }
     }
 
@@ -104,12 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
             }
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Ocurrió un error en la conexión',
-                confirmButtonText: "Aceptar",
-            });
+          console.error(error);
         }
     }
 
