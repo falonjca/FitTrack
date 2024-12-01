@@ -111,3 +111,51 @@ select {
     width: 100%;
     margin-top: 14px;
 }
+
+.tablaa {
+    margin-top: 50px;
+    width: 90%;
+}
+
+#tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#tabla thead {
+    background-color: rgb(0, 107, 130);
+    color: #fff;
+}
+
+#tabla th,
+#tabla td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+#tabla tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#tabla tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+
+.centered {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.esp{
+    margin-top: 30px;
+}
+
+.co{
+    color: white;
+    background-color: #000;
+    margin-top: 25px;
+}

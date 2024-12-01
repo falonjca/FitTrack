@@ -21,6 +21,21 @@ exports.crearRutina = async (req, res) => {
   }
 };
 
+exports.obtenerRutinas = async (req, res) => {
+
+  const params = {
+    TableName: 'Rutinas',
+   
+  };
+
+  try {
+    const result = await docClient.send(new ScanCommand(params));
+    res.json(result.Items);
+  } catch (error) {
+    res.status(500).json({ error: 'Error obteniendo rutinas', details: error.message });
+  } 
+
+};
 
 // Obtener rutina
 exports.obtenerRutinaPorId = async (req, res) => {

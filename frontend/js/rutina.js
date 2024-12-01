@@ -1,3 +1,39 @@
+const tabla = $('#tabla').DataTable({
+    lengthMenu: [2, 5, 10, 15],
+    pageLength: 5,
+    language: {
+        lengthMenu: "Mostrar _MENU_ registros",
+        zeroRecords: "No se encontraron datos",
+        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        search: "Buscar:",
+        loadingRecords: "Cargando...",
+        paginate: {
+            first: "Primero",
+            last: "Último",
+            next: "Siguiente",
+            previous: "Anterior"
+        }
+    }
+});
+
+async function cargarDatos() {
+    try {
+        const response = await fetch(`${baseUrl}/rutinas`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': key
+            }
+        });
+        const data = await response.json();
+
+
+
+}catch (error) {
+    console.error('Error al cargar los datos:', error);
+    }
+}
+
 const formu = document.getElementById('crearRutinaForm');
 
 formu.addEventListener('submit', async (e) => {
@@ -11,9 +47,7 @@ formu.addEventListener('submit', async (e) => {
             text: 'No se encontró el ID del usuario',
             icon: 'error'
         }).then(() => {
-
             window.location.href = '/login.html';
-
         });
         return;
     }
@@ -71,7 +105,14 @@ formu.addEventListener('submit', async (e) => {
 
 const boton = document.getElementById('boton');
 
+// Deshabilitar el botón de agregar ejercicio después de haber agregado el primero
+let ejercicioAgregado = false;
+
 boton.addEventListener('click', () => {
+    if (ejercicioAgregado) {
+        // Si ya se agregó un ejercicio, no se hace nada más.
+        return;
+    }
 
     const ejerciciosSubFormu = document.getElementById('ejerciciosF');
     
@@ -87,14 +128,15 @@ boton.addEventListener('click', () => {
         
         <label>Series:</label>
         <input type="number" class="series" required>
-        
-        <button type="button" class="eliminar">Eliminar Ejercicio</button>
     `;
 
-    ejercicioDiv.querySelector('.eliminar').addEventListener('click', () => {
-        ejerciciosSubFormu.removeChild(ejercicioDiv);
-    });
+    // Elimina el botón de "Agregar Ejercicio" después de mostrar el formulario
+    boton.style.display = 'none';
 
     ejerciciosSubFormu.appendChild(ejercicioDiv);
+
+    // Marca que ya se ha agregado un ejercicio
+    ejercicioAgregado = true;
 });
+
 
