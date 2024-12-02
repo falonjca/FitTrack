@@ -41,7 +41,8 @@ login.addEventListener('submit', async (e) => {
         
             Swal.fire({
                 icon: 'success',
-                title: 'Inicio de sesión exitoso',
+                title: 'Éxito',
+                text: 'Has Iniciado Sesión Correctamente',
                 confirmButtonText: "Aceptar",
             }).then(() => {
                 window.location.href = 'home.html'; 

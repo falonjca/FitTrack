@@ -1,19 +1,7 @@
-const tabla = $('#tabla').DataTable({
-    lengthMenu: [2, 5, 10, 15],
-    pageLength: 5,
-    language: {
-        lengthMenu: "Mostrar _MENU_ registros",
-        zeroRecords: "No se encontraron datos",
-        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-        search: "Buscar:",
-        loadingRecords: "Cargando...",
-        paginate: {
-            first: "Primero",
-            last: "Último",
-            next: "Siguiente",
-            previous: "Anterior"
-        }
-    }
+let tabla;
+$(document).ready(function() {
+    tabla = $('#tabla').DataTable(configTabla);
+    cargarDatos();
 });
 
 async function cargarDatos() {
@@ -27,10 +15,31 @@ async function cargarDatos() {
         });
         const data = await response.json();
 
+        tabla.clear();
+        data.forEach(rutina => {
+            rutina.Ejercicios.forEach(ejercicio => {
+                tabla.row.add([
+                    rutina.Nombre, 
+                    rutina.Descripcion, 
+                    ejercicio.Nombre, 
+                    ejercicio.Repeticiones, 
+                    ejercicio.Series, 
+                    `
+                        <button onclick="editar('${rutina.RutinaId}', '${rutina.Nombre}', '${rutina.Descripcion}', {
+                            Nombre: '${ejercicio.Nombre}',
+                            Repeticiones: ${ejercicio.Repeticiones},
+                            Series: ${ejercicio.Series}
+                        })">Editar</button>
+                        <button onclick="eliminar('${rutina.RutinaId}')">Eliminar</button>
+                    `
+                ]);
+            });
+        });
+        
+tabla.draw();
 
-
-}catch (error) {
-    console.error('Error al cargar los datos:', error);
+    } catch (error) {
+        console.error("Error cargando datos:", error);
     }
 }
 
@@ -85,7 +94,8 @@ formu.addEventListener('submit', async (e) => {
         if (response.ok) { 
             Swal.fire({
                 icon: 'success',
-                title: 'Rutina Creada Exitosamente',
+                title: 'Éxito',
+                text: 'Rutina Registrada Exitosamente',
                 confirmButtonText: "Aceptar",
             }).then(() => {
                 window.location.href = 'home.html'; 
@@ -105,14 +115,9 @@ formu.addEventListener('submit', async (e) => {
 
 const boton = document.getElementById('boton');
 
-// Deshabilitar el botón de agregar ejercicio después de haber agregado el primero
 let ejercicioAgregado = false;
 
 boton.addEventListener('click', () => {
-    if (ejercicioAgregado) {
-        // Si ya se agregó un ejercicio, no se hace nada más.
-        return;
-    }
 
     const ejerciciosSubFormu = document.getElementById('ejerciciosF');
     
@@ -130,13 +135,90 @@ boton.addEventListener('click', () => {
         <input type="number" class="series" required>
     `;
 
-    // Elimina el botón de "Agregar Ejercicio" después de mostrar el formulario
     boton.style.display = 'none';
 
     ejerciciosSubFormu.appendChild(ejercicioDiv);
 
-    // Marca que ya se ha agregado un ejercicio
     ejercicioAgregado = true;
 });
 
+const editar = (id, nombre, descripcion, ejercicio) => {
+    const editForm = document.getElementById("editForm");
+    editForm.style.display = "block";
+
+    document.getElementById("editRutina").value = nombre;
+    document.getElementById("editDescripcion").value = descripcion;
+    document.getElementById("editEjercicio").value = ejercicio.Nombre;
+    document.getElementById("editRepeticiones").value = ejercicio.Repeticiones;
+    document.getElementById("editSeries").value = ejercicio.Series;
+
+    editForm.onsubmit = async (e) => {
+        e.preventDefault();
+
+        const updatedRutina = {
+            Nombre: document.getElementById("editRutina").value,
+            Descripcion: document.getElementById("editDescripcion").value,
+            Ejercicios: [
+                {
+                    Nombre: document.getElementById("editEjercicio").value,
+                    Repeticiones: parseInt(document.getElementById("editRepeticiones").value),
+                    Series: parseInt(document.getElementById("editSeries").value),
+                },
+            ],
+        };
+
+        try {
+        
+            const response = await fetch(`${baseUrl}/rutinas/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-api-key": key,
+                },
+                body: JSON.stringify(updatedRutina),
+            });
+
+            if (response.ok) {
+                Swal.fire("Éxito", "Rutina actualizada correctamente", "success").then(() => {
+                    cargarDatos(); 
+                    editForm.style.display = "none"; 
+                });
+            } else {
+                Swal.fire("Error", "No se pudo actualizar", "error");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+};
+
+document.getElementById("cancelEdit").addEventListener("click", () => {
+
+    document.getElementById("editForm").style.display = "none";
+
+});
+
+window.onload = () => {
+    cargarDatos();
+    editar(id, nombre, descripcion, ejercicio);
+
+}
+
+const eliminar = async (id) => {
+    try {
+        const response = await fetch(`${baseUrl}/rutinas/${id}`, {
+            method: "DELETE",
+            headers: { "x-api-key": key }
+        });
+
+        if (response.ok) {
+            Swal.fire("Éxito", "Rutina eliminada", "success");
+            cargarDatos();
+        } else {
+            Swal.fire("Error", "No se pudo eliminar", "error");
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
 

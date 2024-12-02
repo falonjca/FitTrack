@@ -33,8 +33,8 @@ formulario.addEventListener('submit', async (e) => {
         if (response.ok) { 
             Swal.fire({
                 icon: 'success',
-                title: 'Registro exitoso',
-                text: 'Usuario registrado exitosamente',
+                title: 'Éxito',
+                text: 'Usuario Registrado',
                 confirmButtonText: 'Aceptar',
            
         }).then(() => {

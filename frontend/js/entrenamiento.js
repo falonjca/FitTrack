@@ -1,20 +1,7 @@
-
-const tabla = $('#tabla').DataTable({
-    lengthMenu: [2, 5, 10, 15],
-    pageLength: 5,
-    language: {
-        lengthMenu: "Mostrar _MENU_ registros",
-        zeroRecords: "No se encontraron datos",
-        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-        search: "Buscar:",
-        loadingRecords: "Cargando...",
-        paginate: {
-            first: "Primero",
-            last: "Último",
-            next: "Siguiente",
-            previous: "Anterior"
-        }
-    }
+let tabla;
+$(document).ready(function() {
+    tabla = $('#tabla').DataTable(configTabla);
+    cargarDatos();
 });
 
 /*
@@ -79,9 +66,16 @@ document.getElementById("entrenamientoForm").addEventListener("submit", async (e
             body: JSON.stringify(datos)
         });
 
-        if (response.ok) {
-            Swal.fire("Éxito", "Entrenamiento registrado", "success")
-            cargarDatos();
+        if (response.ok) { 
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'Entrenamiento Registrado Exitosamente',
+                confirmButtonText: "Aceptar",
+            }).then(() => {
+                window.location.href = 'home.html'; 
+            });
+            
         } else {
             Swal.fire("Error", "No se pudo registrar", "error");
         }
@@ -132,7 +126,7 @@ const editar = (id, tipo, duracion, calorias) => {
     };
 };
 
-
+[ { "M" : { "Nombre" : { "S" : "Zumba" }, "Repeticiones" : { "N" : "121" }, "Series" : { "N" : "121" } } } ]
 const eliminar = async (id) => {
     try {
         const response = await fetch(`${baseUrl}/entrenamientos/${id}`, {
@@ -159,10 +153,7 @@ window.onload = () => {
 
 
 document.getElementById("cancelEdit").addEventListener("click", () => {
-    // ocultar el formulario de edition
+ 
     document.getElementById("editForm").style.display = "none";
 
-    document.getElementById("tipo").value = '';
-    document.getElementById("duracion").value = '';
-    document.getElementById("calorias").value = '';
 });

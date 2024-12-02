@@ -41,7 +41,7 @@
             </div>
             <button type="button" class="b" id="boton">Agregar Ejercicio</button>
 
-            <button type="submit" class="btn">Crear Rutina</button>
+            <button type="submit" class="b">Crear Rutina</button>
         </form>
     </div>
 
@@ -63,15 +63,19 @@
 
     <div class="esp">
         <form id="editForm" style="display: none;">
-            <h2>Editar Rutina</h2>
-            <label for="editTipo">Tipo:</label>
-            <input type="text" id="editTipo" name="tipo" required>
-            <label for="editDuracion">Duración:</label>
-            <input type="number" id="editDuracion" name="duracion" required>
-            <label for="editCalorias">Calorías:</label>
-            <input type="number" id="editCalorias" name="calorias" required>
-            <button type="submit">Guardar</button>
-            <button type="button" id="cancelEdit">Cancelar</button>
+            <h2 class="t">Editar Rutina</h2>
+            <label for="editRutina">Nombre de Rutina:</label>
+            <input type="text" id="editRutina" required>
+            <label for="editDescripcion">Descripción:</label>
+            <input type="text" id="editDescripcion" required>
+            <label for="editEjercicio">Nombre de Ejercicio:</label>
+            <input type="text" id="editEjercicio" required>
+            <label for="editRepeticiones">Repeticiones:</label>
+            <input type="number" id="editRepeticiones" required>
+            <label for="editSeries">Series:</label>
+            <input type="number" id="editSeries" required>
+            <button class="bt" type="submit">Guardar</button>
+            <button class="bt" type="button" id="cancelEdit">Cancelar</button>
         </form>
     </div>
 
