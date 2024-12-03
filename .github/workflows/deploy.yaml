@@ -3,7 +3,7 @@ name: Deploy Backend to Lambda and Frontend to S3
 on:
   push:
     branches:
-      - Diego
+      - pruebaFinal
 
 jobs:
   deploy_lambda:
@@ -52,4 +52,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEYL }}
           AWS_REGION: ${{ secrets.AWS_REGIONL }}
         run: |
-          aws s3 sync ./frontend/ s3://prueba-front-static --delete
+          aws s3 sync ./frontend/ s3://prueba-front-static1 --delete
